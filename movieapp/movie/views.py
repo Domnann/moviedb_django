@@ -26,13 +26,14 @@ import pandas as pd
 api_version = 3
 api_key = "99558ae618ca3adc4cfcf6b988a999dd"
 api_base_url = f"https://api.themoviedb.org/{api_version}"
-endpoint_path = f"/search/multi"
+endpoint_path = f"/search/movie"
+
 
 
 def index(request):
     if request.method == 'POST':
         searh_query = request.POST['search']
-        endpoint = f"{api_base_url}{endpoint_path}?api_key={api_key}&query={searh_query}&language=en-US"
+        endpoint = f"{api_base_url}{endpoint_path}?api_key={api_key}&query={searh_query}"
         # print(endpoint)
         r = requests.get(endpoint)
         # pprint.pprint(r.json())
@@ -40,8 +41,19 @@ def index(request):
             data = r.json()
             results = data['results']
             if len(results) > 0:
-                print(results[0].keys())
-                for result in results:
-                    _id = result['id']
-                    print(result['title'],"ID:", _id,"\nRelease Date:",result['release_date'],"\nOverview:" ,result['overview'],"\nVote Average:", result['vote_average'] ,"\n\n")
-    return render(request, "movie/index.html")
+                # print(results[0].keys())
+                
+                    stuff ={
+                        "movie_id" : str(result['id']),
+                        "movie_title" : str(result['original_title']),
+                        "movie_release_date" : result['release_date'],
+                        "movie_overview" : str(result['overview']),
+                        "movie_voteavg" : str(result['vote_average']),
+                        "movie_poster" : str(("https://image.tmdb.org/t/p/original/"+ str(result['poster_path']))),
+                    }
+                    
+                   
+
+                    # print(result['title'],"ID:", _id,"\nRelease Date:",result['release_date'],"\nOverview:" ,result['overview'],"\nVote Average:", result['vote_average'] ,"\n\n")
+                 
+    return render(request, "movie/index.html", stuff)
