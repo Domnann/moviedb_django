@@ -76,21 +76,21 @@
             </div>
             <div class="row">
                 
-                {% for results in r.movie_list %}
+                {% for r in movie_list %}
                   <div class=" justify-content-center row" >
                     {% for result in r %}
-                      
-                    <div class=" card bg-light w-75 mb-3">
-                        <div class=" card-body text-secondary">
-                            <img class ="card-img" src="{{r.movie_poster}}" alt="{{r.movie_title}}" style="width:200px"></h4><br>
-                            <h4><span class="badge badge-secondary">Movie id :</span> {{r.movie_id}}</h4>
-                            <h4><span class="badge badge-secondary">Movie Title :</span> {{r.movie_title}}</h4>
-                            <h4><span class="badge badge-secondary">Movie Release Date :</span> {{r.movie_release_date}}</h4>
-                            <h4><span class="badge badge-secondary">Movie Overview :</span> {{r.movie_overview}} </h4>
-                            <h4><span class="badge badge-secondary">Average movie vote : </span> {{r.movie_voteavg}}</h4>
+                      {% if r.movie_title and r.movie_overview and r.movie_id %}
+                        <div class=" card bg-light w-75 mb-3">
+                            <div class=" card-body text-secondary">
+                                <img class ="card-img" src="{{r.movie_poster}}" alt="{{r.movie_title}}" style="width:200px"></h4><br>
+                                <h4><span class="badge badge-secondary">Movie id :</span> {{r.movie_id}}</h4>
+                                <h4><span class="badge badge-secondary">Movie Title :</span> {{r.movie_title}}</h4>
+                                <h4><span class="badge badge-secondary">Movie Release Date :</span> {{r.movie_release_date}}</h4>
+                                <h4><span class="badge badge-secondary">Movie Overview :</span> {{r.movie_overview}} </h4>
+                                <h4><span class="badge badge-secondary">Average movie vote : </span> {{r.movie_voteavg}}</h4>
+                            </div>
                         </div>
-                    </div>
-                      
+                      {% endif %}
                     {% endfor %}
                   </div>  
                 {% endfor %}
