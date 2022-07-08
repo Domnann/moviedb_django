@@ -36,13 +36,15 @@ def index(request):
         endpoint = f"{api_base_url}{endpoint_path}?api_key={api_key}&query={searh_query}"
         # print(endpoint)
         r = requests.get(endpoint)
-        # pprint.pprint(r.json())
+        
         if r.status_code in range(200, 299):
             data = r.json()
             results = data['results']
+            movie_list = []
+            movie_id_list = []
             if len(results) > 0:
                 # print(results[0].keys())
-                
+                for result in results:
                     stuff ={
                         "movie_id" : str(result['id']),
                         "movie_title" : str(result['original_title']),
@@ -51,9 +53,14 @@ def index(request):
                         "movie_voteavg" : str(result['vote_average']),
                         "movie_poster" : str(("https://image.tmdb.org/t/p/original/"+ str(result['poster_path']))),
                     }
-                    
-                   
-
-                    # print(result['title'],"ID:", _id,"\nRelease Date:",result['release_date'],"\nOverview:" ,result['overview'],"\nVote Average:", result['vote_average'] ,"\n\n")
-                 
-    return render(request, "movie/index.html", stuff)
+                    if result['id'] not in movie_id_list:
+                        movie_id_list.append(result['id'])
+                        movie_list.append(stuff)
+                    else:
+                        pass
+                          
+                print (movie_list)
+                print (movie_id_list)
+         
+                return render(request, "movie/index.html", {"movie_list": movie_list})
+    
