@@ -5,7 +5,7 @@
     <!-- Put anything you want here! The spacer below with inline CSS is just for demo purposes!-->
     <div style="height: 20rem"></div>
 </div>
-<!-- Content section-->
+{% comment %} <!-- Content section-->
 <section class="py-5">
     <div id="about"class="container my-5">
         <div class="row justify-content-center">
@@ -16,17 +16,18 @@
             </div>
         </div>
     </div>
-</section>
+</section> {% endcomment %}
 <!-- Content section-->
 <section class="py-5">
-    <div id="search" class="container my-5">
+    <div id="search" class="container my-5" style="color:black">
         <h2 class="row justify-content-center">Search your movie here<br><br></h2>
-        <div class="row justify-content-center">
-            <form class="" action="/search/" method="get">
-                <input type="text" class="form-control rounded" name="q" placeholder="Search here..." >
-                <button type="submit" class="btn btn-outline-primary">search</button>
+        <div class="row ">
+            <form class="form" action="/search/" method="get">
+                <input type="text" class="form-control rounded " name="q" placeholder="Search here..." >
+                <button type="submit" class="btn btn-outline-dark ">search</button>
             </form>
         </div>
+        <br><br><br>
     </div>
     
 </section>
