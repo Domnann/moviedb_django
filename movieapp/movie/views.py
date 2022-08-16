@@ -44,7 +44,7 @@ def search(request):
         
     if r.status_code in range(200, 299):
         data = r.json()
-        print(data)
+        # print(data)
             # results = data['results']
             # movie_list = []
             # movie_id_list = []
